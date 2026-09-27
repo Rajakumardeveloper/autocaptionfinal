@@ -65,9 +65,9 @@ let activeCaptionId = null;
 let lastOverlaySignature = "";
 
 const TEMPLATE_VISUALS = {
-  // These values mirror the original V6 template CSS. The editor uses the
-  // original .t-* classes for the actual visual design; this map only controls
-  // the responsive scale and active-word behavior.
+  // These values mirror the template CSS. The editor uses the
+  // .t-* classes for the actual visual design; this map controls
+  // responsive scale and active-word behavior.
   bold_white: {scale:1, twoTier:true, activeColor:null, lineHeight:'.92'},
   white_yellow: {scale:1, twoTier:true, activeColor:'#ffe600', lineHeight:'.92'},
   yellow_glow: {scale:1, twoTier:false, activeColor:null, lineHeight:'.92'},
@@ -82,6 +82,7 @@ const TEMPLATE_VISUALS = {
   pink_creator: {scale:1, twoTier:true, activeColor:null, lineHeight:'.92'},
   soft_aesthetic: {scale:1, twoTier:true, activeColor:null, lineHeight:'.92'},
   typewriter: {scale:1, twoTier:true, activeColor:null, lineHeight:'.92'},
+  cream_retro: {scale:1, twoTier:true, activeColor:null, lineHeight:'.90'},
   minimal_shadow: {scale:1, twoTier:true, activeColor:null, lineHeight:'.92'},
   news_ticker: {scale:1, twoTier:true, activeColor:null, lineHeight:'.92'},
   purple_neon: {scale:1, twoTier:true, activeColor:null, lineHeight:'.92'},
@@ -94,7 +95,17 @@ const TEMPLATE_VISUALS = {
   big_reveal: {scale:1, twoTier:false, activeColor:null, lineHeight:'.86'},
   deep_shadow: {scale:1, twoTier:true, activeColor:null, lineHeight:'.90'},
   aqua_pop: {scale:1, twoTier:false, activeColor:null, lineHeight:'.90'},
-  red_black_punch: {scale:1, twoTier:false, activeColor:null, lineHeight:'.90'}
+  red_black_punch: {scale:1, twoTier:false, activeColor:null, lineHeight:'.90'},
+  clean_glow: {scale:1, twoTier:true, activeColor:null, lineHeight:'.92'},
+  pixelated_word: {scale:1, twoTier:false, activeColor:'#ffe600', lineHeight:'.90'},
+  liquid_glass: {scale:1, twoTier:true, activeColor:null, lineHeight:'.90'},
+  tabahi: {scale:1, twoTier:true, activeColor:null, lineHeight:'.84'},
+  deep_glow: {scale:1, twoTier:false, activeColor:null, lineHeight:'.88'},
+  highlighted_word: {scale:1, twoTier:true, activeColor:'#ffae00', lineHeight:'.90'},
+  delhi_editor: {scale:1, twoTier:true, activeColor:null, lineHeight:'.92'},
+  aura_blue: {scale:1, twoTier:true, activeColor:null, lineHeight:'.86'},
+  swiss_focus: {scale:1, twoTier:false, activeColor:'#ffd400', lineHeight:'.90'},
+  scribble: {scale:1, twoTier:false, activeColor:'#ffcf2e', lineHeight:'.90'}
 };
 
 function applyTemplateWordStyle(el, templateId, active=false) {
@@ -243,6 +254,11 @@ templateGrid.addEventListener('change', event => {
   if (event.target.name !== 'template') return;
   selectedTemplate = event.target.value;
   selectedTemplateObject = templateById(selectedTemplate);
+  editorTemplateId = selectedTemplate;
+  editorTemplateObject = selectedTemplateObject;
+  if (Array.isArray(editorChunks)) {
+    editorChunks.forEach(c => { c.template_id = selectedTemplate; });
+  }
   document.querySelectorAll('.template-card').forEach(card => card.classList.remove('selected'));
   event.target.closest('.template-card').classList.add('selected');
   const editorSelect = document.getElementById('editorTemplateSelect');
@@ -254,9 +270,10 @@ templateGrid.addEventListener('change', event => {
   const posVal = document.getElementById('editorPosVal');
   if (posRange) posRange.value = positionRange.value;
   if (posVal) posVal.textContent = `${positionRange.value}%`;
+  lastOverlaySignature = "";
   applyPreviewTemplate();
   applyPreviewPosition();
-  if (!captionEditor.hidden) { editorTemplateId = selectedTemplate; editorTemplateObject = selectedTemplateObject; updateEditorOverlay(); }
+  if (!captionEditor.hidden) { updateEditorOverlay(); }
 });
 
 document.getElementById('editorTemplateSelect')?.addEventListener('change', event => {
@@ -264,6 +281,9 @@ document.getElementById('editorTemplateSelect')?.addEventListener('change', even
   selectedTemplateObject = templateById(selectedTemplate);
   editorTemplateId = selectedTemplate;
   editorTemplateObject = selectedTemplateObject;
+  if (Array.isArray(editorChunks)) {
+    editorChunks.forEach(c => { c.template_id = selectedTemplate; });
+  }
   document.querySelectorAll('.template-card').forEach(card => {
     const radio = card.querySelector('input[name="template"]');
     if (radio) {
@@ -278,6 +298,7 @@ document.getElementById('editorTemplateSelect')?.addEventListener('change', even
   const posVal = document.getElementById('editorPosVal');
   if (posRange) posRange.value = positionRange.value;
   if (posVal) posVal.textContent = `${positionRange.value}%`;
+  lastOverlaySignature = "";
   applyPreviewTemplate();
   applyPreviewPosition();
   updateEditorOverlay();
@@ -683,6 +704,7 @@ function updateChunkFromRow(row) {
   c.start = start;
   c.end = end;
   c.words = rebuildWordsPreservingTracking(c.words, words, start, end);
+  c.template_id = editorTemplateId || selectedTemplate;
   const dur = row.querySelector('.caption-duration');
   if (dur) dur.textContent = fmtTime(end-start);
 
@@ -883,7 +905,11 @@ function updateEditorOverlay() {
     } else if (words.length === 2) {
       lineWordGroups = [[words[0]], [words[1]]];
     } else if (words.length === 3) {
-      lineWordGroups = [[words[0], words[1]], [words[2]]];
+      if (template.line_break_mode === 'first_word') {
+        lineWordGroups = [[words[0]], [words[1], words[2]]];
+      } else {
+        lineWordGroups = [[words[0], words[1]], [words[2]]];
+      }
     } else {
       const mid = Math.ceil(words.length / 2);
       lineWordGroups = [words.slice(0, mid), words.slice(mid)];
@@ -898,7 +924,7 @@ function updateEditorOverlay() {
       const wrapper = document.createElement(tagName);
       group.forEach((w, localIndex) => {
         const idx = cursor + localIndex;
-        const el = document.createElement('span');
+        const el = document.createElement('w');
         el.className = `tracked-word${idx === activeWord ? ' word-active' : ''}`;
         el.dataset.wordIndex = String(idx);
         el.textContent = templateDisplayWord(w.text || '', template);
@@ -996,9 +1022,17 @@ renderEditedBtn.addEventListener('click', async () => {
   if (focusedRow) updateChunkFromRow(focusedRow);
   renderEditedBtn.disabled = true; renderSpinner.hidden = false; renderEditedText.textContent = 'Rendering…';
   try {
+    const curTemplateObj = editorTemplateObject || selectedTemplateObject || templateById(editorTemplateId || selectedTemplate);
     const response = await fetch('/api/editor/render', {
       method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({session_id:editorSessionId,chunks:editorChunks,template:editorTemplateObject || selectedTemplateObject || templateById(editorTemplateId),font_size:Number(fontSize.value),position_percent:Number(positionRange.value),audio_volume:Number(exportVolume.value)})
+      body:JSON.stringify({
+        session_id: editorSessionId,
+        chunks: editorChunks,
+        template: curTemplateObj,
+        font_size: Number(fontSize.value || 54),
+        position_percent: Number(positionRange.value || 78),
+        audio_volume: Number(exportVolume.value || 100)
+      })
     });
     if (!response.ok) {
       const err = await response.json().catch(()=>({}));

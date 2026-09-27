@@ -142,8 +142,19 @@ input[type=range] { width:100%; accent-color:var(--accent); }
   text-align: center;
   margin: 0 auto;
 }
+.editor-caption-overlay w,
 .editor-caption-overlay .tracked-word {
   display: inline !important;
+  font: inherit !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  font-style: inherit !important;
+  line-height: inherit !important;
+  color: inherit !important;
+  text-transform: inherit !important;
+  text-shadow: inherit !important;
+  letter-spacing: inherit !important;
   text-decoration: none !important;
   text-decoration-line: none !important;
   border: 0 !important;
@@ -152,14 +163,16 @@ input[type=range] { width:100%; accent-color:var(--accent); }
   background: transparent !important;
   padding: 0 !important;
   vertical-align: baseline;
-  white-space: normal;
+  white-space: pre-wrap !important;
 }
+.editor-caption-overlay w.word-active,
 .editor-caption-overlay .tracked-word.word-active {
   text-decoration: none !important;
   text-decoration-line: none !important;
   filter: brightness(1.18);
 }
 /* Never show the editor's active-word marker as an underline. */
+.editor-caption-overlay w::after,
 .editor-caption-overlay .tracked-word::after { content: none !important; }
 
 /* Safe video-frame behavior. */
@@ -179,13 +192,19 @@ input[type=range] { width:100%; accent-color:var(--accent); }
 @media(max-width:760px){.template-browser-controls{grid-template-columns:1fr}.template-filters{order:2}.template-search{order:1}}
 
 /* Stable editor typography: the active-word marker is a UI state, never an underline. */
-.editor-caption-overlay .tracked-word,.editor-caption-overlay .tracked-word.word-active{ text-decoration:none!important;text-decoration-line:none!important;text-decoration-style:none!important;border-bottom:0!important; }
+.editor-caption-overlay w,
+.editor-caption-overlay .tracked-word,
+.editor-caption-overlay w.word-active,
+.editor-caption-overlay .tracked-word.word-active{ text-decoration:none!important;text-decoration-line:none!important;text-decoration-style:none!important;border-bottom:0!important; }
+.editor-caption-overlay w.word-active,
 .editor-caption-overlay .tracked-word.word-active{ filter:brightness(1.12); }
 .t-white-yellow .word-active { color: #ffe600 !important; text-shadow: 0 0 10px rgba(255,230,0,.6) !important; }
 .t-creator-bold .word-active { color: #ffd400 !important; text-shadow: 0 0 10px rgba(255,212,0,.6) !important; }
 .t-black-box .word-active { color: #ffe600 !important; }
 .t-swiss .word-active { color: #ffd400 !important; }
 .t-scribble .word-active { color: #ffcf2e !important; }
+.t-pixelated .word-active { color: #ffe600 !important; }
+.t-highlighted-word .word-active { color: #ffae00 !important; }
 .template-card.selected .template-preview::after{content:'✓';position:absolute;top:8px;left:8px;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:#8b5cf6;color:#fff;font-size:12px;font-weight:900;box-shadow:0 5px 15px rgba(139,92,246,.28)}
 .t-clean-glow span,.t-clean-glow strong{color:#fff;font:500 22px Arial,sans-serif;text-shadow:0 0 9px rgba(255,255,255,.75)}
 .t-pixelated span,.t-pixelated strong{color:#fff;font:800 24px "Courier New",monospace;text-shadow:2px 2px 0 #000;letter-spacing:1px}

@@ -789,27 +789,27 @@ def _split_words_for_render(words, max_words=RENDER_MAX_WORDS, max_chars=RENDER_
 def prepare_render_chunks(chunks, template=None):
     """Keep the user's original caption chunks intact.
 
-    A normal caption (including a 3-word or 4-word caption) remains ONE render event.
+    A normal caption remains ONE render event.
     Only a caption that became too long after editing is split into smaller
     chunks. Splits stay inside that caption's own time range, so captions are
     never accidentally merged together.
     """
     prepared = []
     template = template or get_template_object("bold_white")
-    default_words = max(6, int(template.get("chunk_words", RENDER_MAX_WORDS)) * 2)
+    chunk_words = int(template.get("chunk_words", 4))
     max_lines = max(1, int(template.get("max_lines", 2)))
-    default_chars = max(30, int(template.get("max_chars", RENDER_MAX_CHARS))) * max_lines
+    default_words = max(4, chunk_words * max_lines)
+    default_chars = max(24, int(template.get("max_chars", 28))) * max_lines
     for chunk in chunks or []:
         words = chunk.get('words', []) or []
-        max_words = max(default_words, int(chunk.get("pattern_words") or len(words)))
-        max_chars = max(default_chars, int(chunk.get("pattern_max_chars") or default_chars))
-        groups = _split_words_for_render(words, max_words=max_words, max_chars=max_chars)
+        groups = _split_words_for_render(words, max_words=default_words, max_chars=default_chars)
         if not groups:
             continue
         if len(groups) == 1:
             copy = dict(chunk)
             copy['words'] = list(groups[0])
             copy['text'] = ' '.join(str(w.get('text', '')).strip() for w in groups[0]).strip()
+            copy['template_id'] = template.get('id', chunk.get('template_id', 'bold_white'))
             prepared.append(copy)
             continue
 
@@ -828,6 +828,7 @@ def prepare_render_chunks(chunks, template=None):
                 'end': max(gs + 0.05, ge),
                 'text': ' '.join(str(w.get('text', '')).strip() for w in group).strip(),
                 'words': list(group),
+                'template_id': template.get('id', chunk.get('template_id', 'bold_white')),
             })
     return prepared
 
@@ -875,18 +876,8 @@ def render_highlighted_text(chunk: dict, active_index: int, style: dict, max_cha
         first = words[:split]
         second = words[split:]
 
-    line1_color = ass_color(style['text_color'])
-    if tmpl_id == 'white_yellow':
-        line2_color = ass_color(style.get('highlight_color', '#FFE600'))
-    elif tmpl_id == 'clean_white':
-        line1_color = ass_color('#BBBBBB')
-        line2_color = ass_color('#FFFFFF')
-    elif tmpl_id == 'soft_aesthetic':
-        line1_color = ass_color('#C8C0B5')
-        line2_color = ass_color('#F4F0EA')
-    else:
-        line2_color = ass_color(style['text_color'])
-
+    line1_color = ass_color(style.get('line1_color', style['text_color']))
+    line2_color = ass_color(style.get('line2_color', style.get('highlight_color', style['text_color'])))
     highlight_colour = ass_color(style.get('highlight_color', style['text_color']))
 
     def render_word(index, word, default_color):
@@ -1022,17 +1013,29 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         start = ass_time(chunk['start'])
         end = ass_time(chunk['end'])
         animation = str(template.get("animation", "none"))
+        # Static pos tag keeps text in place without jumping or shrinking on each word
+        pos_tag_static = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}"
+        if animation == "glow":
+            glow = max(2, min(10, int(round(float(style.get("shadow", 5)) * 0.7))))
+            pos_tag_static += "{\\blur%d\\bord%d}" % (glow, max(1, int(export_outline_width)))
+
+        # Chunk entrance animation (applied only at chunk start)
         if animation == "slide":
-            pos_tag = f"{{\\an5\\move({canvas_width//2},{safe_y+35},{canvas_width//2},{safe_y},0,180)}}"
+            pos_tag_entrance = f"{{\\an5\\move({canvas_width//2},{safe_y+35},{canvas_width//2},{safe_y},0,180)}}"
+        elif animation == "pop":
+            pos_tag_entrance = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}{{\\fscx92\\fscy92\\t(0,120,\\fscx100\\fscy100)}}"
+        elif animation == "fade":
+            pos_tag_entrance = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}{{\\fad(110,0)}}"
         else:
-            pos_tag = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}"
-            if animation == "pop":
-                pos_tag += r"{\fscx92\fscy92\t(0,120,\fscx100\fscy100)}"
-            elif animation == "fade":
-                pos_tag += r"{\fad(110,80)}"
-            elif animation == "glow":
-                glow = max(2, min(10, int(round(float(style.get("shadow", 5)) * 0.7))))
-                pos_tag += "{\\blur%d\\bord%d}" % (glow, max(1, int(export_outline_width)))
+            pos_tag_entrance = pos_tag_static
+
+        # Standard pos tag for entire chunk when not highlighted word-by-word
+        if animation == "slide" or animation == "pop":
+            pos_tag_chunk = pos_tag_entrance
+        elif animation == "fade":
+            pos_tag_chunk = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}{{\\fad(110,80)}}"
+        else:
+            pos_tag_chunk = pos_tag_static
 
         if style.get('highlight') and len(words) > 1:
             for idx, word in enumerate(words):
@@ -1042,9 +1045,16 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                 if active_end <= active_start:
                     continue
                 highlighted = render_highlighted_text(chunk, idx, style, max_chars, template, span_size, strong_size)
-                lines.append(f"Dialogue: 0,{ass_time(active_start)},{ass_time(active_end)},Default,,0,0,0,,{pos_tag}{highlighted}\n")
+                # Animate entrance ONLY on the first word of the chunk; subsequent words stay rock-solid
+                if idx == 0:
+                    tag = pos_tag_entrance
+                elif idx == len(words) - 1 and animation == "fade":
+                    tag = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}{{\\fad(0,80)}}"
+                else:
+                    tag = pos_tag_static
+                lines.append(f"Dialogue: 0,{ass_time(active_start)},{ass_time(active_end)},Default,,0,0,0,,{tag}{highlighted}\n")
         else:
-            lines.append(f"Dialogue: 0,{start},{end},Default,,0,0,0,,{pos_tag}{display_text}\n")
+            lines.append(f"Dialogue: 0,{start},{end},Default,,0,0,0,,{pos_tag_chunk}{display_text}\n")
 
     out_path.write_text(''.join(lines), encoding='utf-8')
 
@@ -1165,8 +1175,8 @@ async def caption_video(
     try:
         requested_size = int(font_size)
     except (TypeError, ValueError):
-        requested_size = style["font_size"]
-    font_size = style["font_size"] if requested_size == 54 else max(32, min(80, requested_size))
+        requested_size = 54
+    font_size = max(32, min(80, requested_size))
 
     try:
         audio_volume = int(audio_volume)
@@ -1415,11 +1425,13 @@ async def render_editor(request: dict):
         if isinstance(requested_template, dict) and str(requested_template.get("id", template_id)) == template_id:
             template.update({k: requested_template[k] for k in template.keys() if k in requested_template})
 
+        chunks = prepare_render_chunks(chunks, template)
+
         try:
             req_size = int(request.get("font_size", 0))
-            font_size = max(32, min(80, req_size)) if req_size > 0 else int(session.get("font_size", style["font_size"]))
+            font_size = max(32, min(80, req_size)) if req_size > 0 else int(session.get("font_size", 54))
         except (TypeError, ValueError):
-            font_size = int(session.get("font_size", style["font_size"]))
+            font_size = int(session.get("font_size", 54))
 
         try:
             req_pos = int(request.get("position_percent", 0))
