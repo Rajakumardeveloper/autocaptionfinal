@@ -50,232 +50,263 @@ EDITOR_SESSIONS = {}
 
 CAPTION_TEMPLATES = {
     "bold_white": dict(
-        font_name="Impact", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=4,
-        shadow=2, bold=True, italic=False, font_size=58, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=0.62,
+        font_name="Impact", font_name_line1="Impact", font_name_line2="Impact",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
+        effect_type="shadow", shadow_x=3, shadow_y=3, shadow_color="#000000", shadow_blur=0,
+        outline_width=0, outline_color="#000000",
+        bold=True, italic=False, font_size=58, span_scale=0.61, highlight=False,
     ),
     "white_yellow": dict(
-        font_name="Impact", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFE600",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=4,
-        shadow=2, bold=True, italic=False, font_size=58, border_style=1, highlight=True,
-        highlight_color="#FFE600", span_scale=0.62,
+        font_name="Impact", font_name_line1="Arial", font_name_line2="Impact",
+        bold_line1=True, bold_line2=True, italic_line1=False, italic_line2=False,
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFE600",
+        effect_type="none", outline_width=0, outline_color="#000000",
+        shadow_x=0, shadow_y=0, shadow=0,
+        bold=True, italic=False, font_size=58, span_scale=0.61,
+        highlight=True, highlight_color="#FFE600", highlight_glow=True,
+        glow_color="#FFE600", glow_size=4, glow_blur=8,
     ),
     "yellow_glow": dict(
-        font_name="Impact", text_color="#FFE600", line1_color="#FFE600", line2_color="#FFE600",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=4,
-        shadow=4, bold=True, italic=False, font_size=58, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Impact", font_name_line1="Impact", font_name_line2="Impact",
+        text_color="#FFE600", line1_color="#FFE600", line2_color="#FFE600",
+        effect_type="glow", glow_color="#FFE600", glow_size=5, glow_blur=10,
+        outline_width=0, shadow=0,
+        bold=True, italic=False, font_size=58, span_scale=1.0, highlight=False,
     ),
     "creator_bold": dict(
-        font_name="Impact", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=6,
-        shadow=3, bold=True, italic=False, font_size=64, border_style=1, highlight=True,
-        highlight_color="#FFD400", span_scale=1.0,
+        font_name="Impact", font_name_line1="Impact", font_name_line2="Impact",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
+        effect_type="shadow", shadow_x=3, shadow_y=3, shadow_color="#000000", shadow_blur=0,
+        outline_width=0, bold=True, italic=False, font_size=64, span_scale=1.0,
+        highlight=True, highlight_color="#FFD400", highlight_glow=True,
+        glow_color="#FFD400", glow_size=4, glow_blur=8,
     ),
     "clean_white": dict(
-        font_name="Arial", text_color="#FFFFFF", line1_color="#BBBBBB", line2_color="#FFFFFF",
-        background_color="#000000", background_opacity=0, outline_color="#111111", outline_width=2,
-        shadow=2, bold=False, italic=False, font_size=52, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=0.72,
+        font_name="Arial", font_name_line1="Arial", font_name_line2="Arial",
+        text_color="#FFFFFF", line1_color="#BBBBBB", line2_color="#FFFFFF",
+        effect_type="none", outline_width=0, shadow=0,
+        bold=False, italic=False, font_size=52, span_scale=0.72, highlight=False,
     ),
     "yellow_bold": dict(
-        font_name="Impact", text_color="#FFD800", line1_color="#FFD800", line2_color="#FFD800",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=5,
-        shadow=2, bold=True, italic=False, font_size=60, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Impact", font_name_line1="Impact", font_name_line2="Impact",
+        text_color="#FFD800", line1_color="#FFD800", line2_color="#FFD800",
+        effect_type="shadow", shadow_x=3, shadow_y=3, shadow_color="#000000", shadow_blur=0,
+        outline_width=0, bold=True, italic=False, font_size=60, span_scale=1.0, highlight=False,
     ),
     "black_box": dict(
-        font_name="Arial", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
-        background_color="#000000", background_opacity=88, outline_color="#000000", outline_width=0,
-        shadow=0, bold=True, italic=False, font_size=52, border_style=3, highlight=True,
-        highlight_color="#FFE600", span_scale=1.0,
+        font_name="Arial", font_name_line1="Arial", font_name_line2="Arial",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
+        effect_type="box", background_color="#000000", background_opacity=90, box_padding=14,
+        outline_width=0, shadow=0, border_style=3,
+        bold=True, italic=False, font_size=52, span_scale=1.0,
+        highlight=True, highlight_color="#FFE600", highlight_glow=False,
     ),
     "white_box": dict(
-        font_name="Arial", text_color="#111111", line1_color="#111111", line2_color="#111111",
-        background_color="#FFFFFF", background_opacity=92, outline_color="#FFFFFF", outline_width=0,
-        shadow=0, bold=True, italic=False, font_size=50, border_style=3, highlight=False,
-        highlight_color="#111111", span_scale=1.0,
+        font_name="Arial", font_name_line1="Arial", font_name_line2="Arial",
+        text_color="#111111", line1_color="#111111", line2_color="#111111",
+        effect_type="box", background_color="#FFFFFF", background_opacity=95, box_padding=14,
+        outline_width=0, shadow=0, border_style=3,
+        bold=True, italic=False, font_size=50, span_scale=1.0, highlight=False,
     ),
     "red_alert": dict(
-        font_name="Impact", text_color="#FF3B30", line1_color="#FF3B30", line2_color="#FF3B30",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=4,
-        shadow=2, bold=True, italic=False, font_size=58, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Impact", font_name_line1="Impact", font_name_line2="Impact",
+        text_color="#FF3B30", line1_color="#FF3B30", line2_color="#FF3B30",
+        effect_type="shadow", shadow_x=3, shadow_y=3, shadow_color="#000000", shadow_blur=0,
+        outline_width=0, bold=True, italic=False, font_size=58, span_scale=1.0, highlight=False,
     ),
     "cyan_pop": dict(
-        font_name="Impact", text_color="#35E7FF", line1_color="#35E7FF", line2_color="#35E7FF",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=4,
-        shadow=3, bold=True, italic=False, font_size=58, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Impact", font_name_line1="Impact", font_name_line2="Impact",
+        text_color="#35E7FF", line1_color="#35E7FF", line2_color="#35E7FF",
+        effect_type="shadow", shadow_x=2, shadow_y=2, shadow_color="#000000", shadow_blur=0,
+        outline_width=0, bold=True, italic=False, font_size=58, span_scale=1.0, highlight=False,
     ),
     "blue_electric": dict(
-        font_name="Arial", text_color="#4EA1FF", line1_color="#4EA1FF", line2_color="#4EA1FF",
-        background_color="#000000", background_opacity=0, outline_color="#081B4A", outline_width=4,
-        shadow=4, bold=True, italic=False, font_size=56, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Arial", font_name_line1="Arial", font_name_line2="Arial",
+        text_color="#4EA1FF", line1_color="#4EA1FF", line2_color="#4EA1FF",
+        effect_type="shadow", shadow_x=2, shadow_y=2, shadow_color="#081B4A", shadow_blur=0,
+        outline_width=0, bold=True, italic=False, font_size=56, span_scale=1.0, highlight=False,
     ),
     "pink_creator": dict(
-        font_name="Impact", text_color="#FF5FD7", line1_color="#FF5FD7", line2_color="#FF5FD7",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=4,
-        shadow=3, bold=True, italic=False, font_size=58, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Impact", font_name_line1="Impact", font_name_line2="Impact",
+        text_color="#FF5FD7", line1_color="#FF5FD7", line2_color="#FF5FD7",
+        effect_type="shadow", shadow_x=2, shadow_y=2, shadow_color="#000000", shadow_blur=0,
+        outline_width=0, bold=True, italic=False, font_size=58, span_scale=1.0, highlight=False,
     ),
     "soft_aesthetic": dict(
-        font_name="Georgia", text_color="#F4F0EA", line1_color="#C8C0B5", line2_color="#F4F0EA",
-        background_color="#303030", background_opacity=0, outline_color="#555555", outline_width=1,
-        shadow=2, bold=False, italic=True, font_size=48, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=0.72,
+        font_name="Georgia", font_name_line1="Georgia", font_name_line2="Georgia",
+        text_color="#F4F0EA", line1_color="#C8C0B5", line2_color="#F4F0EA",
+        effect_type="none", outline_width=0, shadow=0,
+        bold=False, italic=True, font_size=48, span_scale=0.72, highlight=False,
     ),
     "typewriter": dict(
-        font_name="Courier New", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
-        background_color="#111111", background_opacity=85, outline_color="#000000", outline_width=1,
-        shadow=1, bold=True, italic=False, font_size=45, border_style=3, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
-    ),
-    "minimal_shadow": dict(
-        font_name="Arial", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=1,
-        shadow=5, bold=False, italic=False, font_size=54, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
-    ),
-    "news_ticker": dict(
-        font_name="Arial", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
-        background_color="#D71920", background_opacity=94, outline_color="#D71920", outline_width=0,
-        shadow=0, bold=True, italic=False, font_size=44, border_style=3, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
-    ),
-    "purple_neon": dict(
-        font_name="Arial", text_color="#D58CFF", line1_color="#D58CFF", line2_color="#D58CFF",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=3,
-        shadow=4, bold=True, italic=False, font_size=56, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
-    ),
-    "green_focus": dict(
-        font_name="Impact", text_color="#B8FF4A", line1_color="#B8FF4A", line2_color="#B8FF4A",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=4,
-        shadow=3, bold=True, italic=False, font_size=58, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Courier New", font_name_line1="Courier New", font_name_line2="Courier New",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
+        effect_type="box", background_color="#111111", background_opacity=90, box_padding=10,
+        outline_width=0, shadow=0, border_style=3,
+        bold=True, italic=False, font_size=45, span_scale=1.0, highlight=False,
     ),
     "cream_retro": dict(
-        font_name="Georgia", text_color="#FFF0C2", line1_color="#FFF0C2", line2_color="#FFF0C2",
-        background_color="#402B18", background_opacity=0, outline_color="#23170D", outline_width=3,
-        shadow=3, bold=True, italic=False, font_size=50, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Georgia", font_name_line1="Georgia", font_name_line2="Georgia",
+        text_color="#FFF0C2", line1_color="#FFF0C2", line2_color="#FFF0C2",
+        effect_type="shadow", shadow_x=2, shadow_y=2, shadow_color="#23170D", shadow_blur=4,
+        outline_width=0, bold=True, italic=False, font_size=50, span_scale=1.0, highlight=False,
+    ),
+    "minimal_shadow": dict(
+        font_name="Arial", font_name_line1="Arial", font_name_line2="Arial",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
+        effect_type="shadow", shadow_x=3, shadow_y=4, shadow_color="#000000", shadow_blur=6,
+        outline_width=0, bold=False, italic=False, font_size=54, span_scale=1.0, highlight=False,
+    ),
+    "news_ticker": dict(
+        font_name="Arial", font_name_line1="Arial", font_name_line2="Arial",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
+        effect_type="box", background_color="#D71920", background_opacity=95, box_padding=14,
+        outline_width=0, shadow=0, border_style=3,
+        bold=True, italic=False, font_size=44, span_scale=1.0, highlight=False,
+    ),
+    "purple_neon": dict(
+        font_name="Arial", font_name_line1="Arial", font_name_line2="Arial",
+        text_color="#D58CFF", line1_color="#D58CFF", line2_color="#D58CFF",
+        effect_type="glow", glow_color="#A942FF", glow_size=5, glow_blur=8,
+        outline_width=0, shadow=0,
+        bold=True, italic=False, font_size=56, span_scale=1.0, highlight=False,
+    ),
+    "green_focus": dict(
+        font_name="Impact", font_name_line1="Impact", font_name_line2="Impact",
+        text_color="#B8FF4A", line1_color="#B8FF4A", line2_color="#B8FF4A",
+        effect_type="shadow", shadow_x=2, shadow_y=2, shadow_color="#000000", shadow_blur=0,
+        outline_width=0, bold=True, italic=False, font_size=58, span_scale=1.0, highlight=False,
     ),
     "editing_skool": dict(
-        font_name="Arial", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
-        background_color="#FF8A00", background_opacity=95, outline_color="#8A3F00", outline_width=1,
-        shadow=2, bold=True, italic=False, font_size=54, border_style=3, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Arial", font_name_line1="Arial", font_name_line2="Arial",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
+        effect_type="box", background_color="#FF8A00", background_opacity=95, box_padding=14,
+        shadow_x=0, shadow_y=3, shadow_color="#8A3F00",
+        outline_width=0, border_style=3,
+        bold=True, italic=False, font_size=54, span_scale=1.0, highlight=False,
     ),
     "mr_beast": dict(
-        font_name="Impact", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=6,
-        shadow=4, bold=True, italic=False, font_size=62, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Impact", font_name_line1="Impact", font_name_line2="Impact",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
+        effect_type="outline", outline_width=4, outline_color="#000000",
+        shadow=0, bold=True, italic=False, font_size=62, span_scale=1.0, highlight=False,
     ),
     "mr_beast_gold": dict(
-        font_name="Impact", text_color="#FFD400", line1_color="#FFD400", line2_color="#FFD400",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=6,
-        shadow=4, bold=True, italic=False, font_size=62, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Impact", font_name_line1="Impact", font_name_line2="Impact",
+        text_color="#FFD400", line1_color="#FFD400", line2_color="#FFD400",
+        effect_type="shadow", shadow_x=4, shadow_y=4, shadow_color="#000000", shadow_blur=0,
+        outline_width=0, bold=True, italic=False, font_size=62, span_scale=1.0, highlight=False,
     ),
     "highlight_orange": dict(
-        font_name="Arial", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=3,
-        shadow=3, bold=True, italic=False, font_size=58, border_style=1, highlight=True,
-        highlight_color="#FF9D00", span_scale=1.0,
+        font_name="Arial", font_name_line1="Arial", font_name_line2="Arial",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
+        effect_type="shadow", shadow_x=3, shadow_y=3, shadow_color="#000000", shadow_blur=0,
+        outline_width=0, bold=True, italic=False, font_size=58, span_scale=1.0,
+        highlight=True, highlight_color="#FF9D00", highlight_glow=False,
     ),
     "green_glow": dict(
-        font_name="Impact", text_color="#B8FF4A", line1_color="#B8FF4A", line2_color="#B8FF4A",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=4,
-        shadow=4, bold=True, italic=False, font_size=58, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Impact", font_name_line1="Impact", font_name_line2="Impact",
+        text_color="#B8FF4A", line1_color="#B8FF4A", line2_color="#B8FF4A",
+        effect_type="glow", glow_color="#7CFF00", glow_size=6, glow_blur=12,
+        outline_width=0, shadow=0,
+        bold=True, italic=False, font_size=58, span_scale=1.0, highlight=False,
     ),
     "big_reveal": dict(
-        font_name="Impact", text_color="#FFE600", line1_color="#FFE600", line2_color="#FFE600",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=6,
-        shadow=3, bold=True, italic=False, font_size=70, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Impact", font_name_line1="Impact", font_name_line2="Impact",
+        text_color="#FFE600", line1_color="#FFE600", line2_color="#FFE600",
+        effect_type="shadow", shadow_x=4, shadow_y=4, shadow_color="#000000", shadow_blur=0,
+        outline_width=0, bold=True, italic=False, font_size=70, span_scale=1.0, highlight=False,
     ),
     "deep_shadow": dict(
-        font_name="Arial", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=2,
-        shadow=8, bold=True, italic=False, font_size=56, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Arial", font_name_line1="Arial", font_name_line2="Arial",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
+        effect_type="shadow", shadow_x=5, shadow_y=6, shadow_color="#000000", shadow_blur=8,
+        outline_width=0, bold=True, italic=False, font_size=56, span_scale=1.0, highlight=False,
     ),
     "aqua_pop": dict(
-        font_name="Impact", text_color="#3DEBFF", line1_color="#3DEBFF", line2_color="#3DEBFF",
-        background_color="#000000", background_opacity=0, outline_color="#003F52", outline_width=4,
-        shadow=3, bold=True, italic=False, font_size=60, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Impact", font_name_line1="Impact", font_name_line2="Impact",
+        text_color="#3DEBFF", line1_color="#3DEBFF", line2_color="#3DEBFF",
+        effect_type="shadow", shadow_x=3, shadow_y=3, shadow_color="#003F52", shadow_blur=0,
+        outline_width=0, bold=True, italic=False, font_size=60, span_scale=1.0, highlight=False,
     ),
     "red_black_punch": dict(
-        font_name="Impact", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
-        background_color="#D71920", background_opacity=95, outline_color="#000000", outline_width=5,
-        shadow=3, bold=True, italic=False, font_size=58, border_style=3, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Impact", font_name_line1="Impact", font_name_line2="Impact",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
+        effect_type="box", background_color="#D71920", background_opacity=95, box_padding=14,
+        shadow_x=3, shadow_y=3, shadow_color="#000000",
+        outline_width=0, border_style=3,
+        bold=True, italic=False, font_size=58, span_scale=1.0, highlight=False,
     ),
     "clean_glow": dict(
-        font_name="Arial", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=3,
-        shadow=5, bold=False, italic=False, font_size=48, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Arial", font_name_line1="Arial", font_name_line2="Arial",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
+        effect_type="glow", glow_color="#FFFFFF", glow_size=5, glow_blur=9,
+        outline_width=0, shadow=0,
+        bold=False, italic=False, font_size=48, span_scale=1.0, highlight=False,
     ),
     "pixelated_word": dict(
-        font_name="Courier New", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=2,
-        shadow=2, bold=True, italic=False, font_size=50, border_style=1, highlight=True,
-        highlight_color="#FFE600", span_scale=1.0,
+        font_name="Courier New", font_name_line1="Courier New", font_name_line2="Courier New",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
+        effect_type="shadow", shadow_x=2, shadow_y=2, shadow_color="#000000", shadow_blur=0,
+        outline_width=0, letter_spacing=1.0,
+        bold=True, italic=False, font_size=50, span_scale=1.0,
+        highlight=True, highlight_color="#FFE600", highlight_glow=False,
     ),
     "liquid_glass": dict(
-        font_name="Arial", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
-        background_color="#24285A", background_opacity=70, outline_color="#7D86FF", outline_width=1,
-        shadow=5, bold=True, italic=False, font_size=48, border_style=3, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Arial", font_name_line1="Arial", font_name_line2="Arial",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
+        effect_type="box", background_color="#24285A", background_opacity=70, box_padding=14,
+        outline_width=0, shadow=0, border_style=3,
+        bold=True, italic=False, font_size=48, span_scale=1.0, highlight=False,
     ),
     "tabahi": dict(
-        font_name="Georgia", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=2,
-        shadow=4, bold=True, italic=True, font_size=52, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Georgia", font_name_line1="Georgia", font_name_line2="Georgia",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFFFFF",
+        effect_type="shadow", shadow_x=2, shadow_y=3, shadow_color="#000000", shadow_blur=5,
+        outline_width=0, bold=True, italic=True, font_size=52, span_scale=1.0, highlight=False,
     ),
     "deep_glow": dict(
-        font_name="Impact", text_color="#FF24FF", line1_color="#FF24FF", line2_color="#FF24FF",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=4,
-        shadow=5, bold=True, italic=False, font_size=58, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=1.0,
+        font_name="Impact", font_name_line1="Impact", font_name_line2="Impact",
+        text_color="#FF24FF", line1_color="#FF24FF", line2_color="#FF24FF",
+        effect_type="glow", glow_color="#FF24FF", glow_size=6, glow_blur=12,
+        outline_width=0, shadow=0,
+        bold=True, italic=False, font_size=58, span_scale=1.0, highlight=False,
     ),
     "highlighted_word": dict(
-        font_name="Arial", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFAE00",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=2,
-        shadow=3, bold=True, italic=False, font_size=54, border_style=1, highlight=True,
-        highlight_color="#FFAE00", span_scale=1.0,
+        font_name="Arial", font_name_line1="Arial", font_name_line2="Arial",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFAE00",
+        effect_type="none", outline_width=0, shadow=0,
+        bold=True, italic=False, font_size=54, span_scale=1.0,
+        highlight=True, highlight_color="#FFAE00", highlight_glow=False,
     ),
     "delhi_editor": dict(
-        font_name="Georgia", text_color="#FFFFFF", line1_color="#EEEEEE", line2_color="#FFFFFF",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=1,
-        shadow=3, bold=False, italic=True, font_size=52, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=0.88,
+        font_name="Georgia", font_name_line1="Georgia", font_name_line2="Georgia",
+        bold_line1=False, italic_line1=True, bold_line2=True, italic_line2=False,
+        text_color="#FFFFFF", line1_color="#EEEEEE", line2_color="#FFFFFF",
+        effect_type="shadow", shadow_x=2, shadow_y=2, shadow_color="#000000", shadow_blur=4,
+        outline_width=0, bold=False, italic=True, font_size=52, span_scale=0.88, highlight=False,
     ),
     "aura_blue": dict(
-        font_name="Georgia", text_color="#8FE7FF", line1_color="#FFFFFF", line2_color="#8FE7FF",
-        background_color="#000000", background_opacity=0, outline_color="#004E67", outline_width=2,
-        shadow=7, bold=True, italic=True, font_size=55, border_style=1, highlight=False,
-        highlight_color="#FFFFFF", span_scale=0.88,
+        font_name="Georgia", font_name_line1="Georgia", font_name_line2="Georgia",
+        bold_line1=False, italic_line1=False, bold_line2=True, italic_line2=True,
+        text_color="#8FE7FF", line1_color="#FFFFFF", line2_color="#8FE7FF",
+        effect_type="glow", glow_color="#004E67", glow_size=5, glow_blur=7,
+        outline_width=0, shadow=0,
+        bold=True, italic=True, font_size=55, span_scale=0.88, highlight=False,
     ),
     "swiss_focus": dict(
-        font_name="Arial", text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFD400",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=2,
-        shadow=2, bold=True, italic=False, font_size=60, border_style=1, highlight=True,
-        highlight_color="#FFD400", span_scale=1.0,
+        font_name="Arial", font_name_line1="Arial", font_name_line2="Arial",
+        text_color="#FFFFFF", line1_color="#FFFFFF", line2_color="#FFD400",
+        effect_type="shadow", shadow_x=2, shadow_y=3, shadow_color="#000000", shadow_blur=4,
+        outline_width=0, bold=True, italic=False, font_size=60, span_scale=1.0,
+        highlight=True, highlight_color="#FFD400", highlight_glow=False,
     ),
     "scribble": dict(
-        font_name="Georgia", text_color="#FFF4A3", line1_color="#FFF4A3", line2_color="#FFCF2E",
-        background_color="#000000", background_opacity=0, outline_color="#000000", outline_width=1,
-        shadow=3, bold=True, italic=True, font_size=50, border_style=1, highlight=True,
-        highlight_color="#FFCF2E", span_scale=0.88,
+        font_name="Georgia", font_name_line1="Georgia", font_name_line2="Georgia",
+        text_color="#FFF4A3", line1_color="#FFF4A3", line2_color="#FFCF2E",
+        effect_type="shadow", shadow_x=2, shadow_y=2, shadow_color="#000000", shadow_blur=4,
+        outline_width=0, bold=True, italic=True, font_size=50, span_scale=0.88,
+        highlight=True, highlight_color="#FFCF2E", highlight_glow=False,
     ),
 }
 
@@ -852,11 +883,25 @@ def template_display_text(text: str, template: dict) -> str:
     return value
 
 
+def _ass_font_name(font_name_or_style) -> str:
+    """Return a Windows/libass-friendly font family while preserving template intent."""
+    if isinstance(font_name_or_style, dict):
+        name = str(font_name_or_style.get("font_name", "Arial"))
+    else:
+        name = str(font_name_or_style or "Arial")
+    aliases = {
+        "Impact": "Impact",
+        "Arial": "Arial",
+        "Georgia": "Georgia",
+        "Courier New": "Courier New",
+    }
+    return aliases.get(name, "Arial")
+
+
 def render_highlighted_text(chunk: dict, active_index: int, style: dict, max_chars: int, template: dict | None = None,
-                            span_size: int = 54, strong_size: int = 84) -> str:
-    """Render one complete caption chunk while changing only the active word color."""
+                            span_size: int = 54, strong_size: int = 84, scale_stroke: float = 1.0) -> str:
+    """Render one complete caption chunk while changing only the active word color/glow."""
     template = template or get_template_object("bold_white")
-    tmpl_id = str(template.get('id', ''))
     words = chunk.get('words', []) or []
     texts = [template_display_text(w.get('text', ''), template) for w in words]
     max_lines = max(1, int(template.get('max_lines', 2)))
@@ -876,23 +921,61 @@ def render_highlighted_text(chunk: dict, active_index: int, style: dict, max_cha
         first = words[:split]
         second = words[split:]
 
-    line1_color = ass_color(style.get('line1_color', style['text_color']))
-    line2_color = ass_color(style.get('line2_color', style.get('highlight_color', style['text_color'])))
-    highlight_colour = ass_color(style.get('highlight_color', style['text_color']))
+    font1 = _ass_font_name(template.get("font_name_line1", template.get("font_name", "Arial")))
+    bold1 = 1 if template.get("bold_line1", template.get("bold", True)) else 0
+    italic1 = 1 if template.get("italic_line1", template.get("italic", False)) else 0
+    line1_color = ass_color(style.get('line1_color', style.get('text_color', '#FFFFFF')))
+
+    font2 = _ass_font_name(template.get("font_name_line2", template.get("font_name", "Arial")))
+    bold2 = 1 if template.get("bold_line2", template.get("bold", True)) else 0
+    italic2 = 1 if template.get("italic_line2", template.get("italic", False)) else 0
+    line2_color = ass_color(style.get('line2_color', style.get('highlight_color', style.get('text_color', '#FFFFFF'))))
+
+    highlight_colour = ass_color(style.get('highlight_color', style.get('text_color', '#FFE600')))
+    effect_type = str(style.get("effect_type", "shadow"))
+    has_glow = bool(style.get("highlight_glow", False))
+
+    if has_glow:
+        gl_col = ass_color(style.get("glow_color", style.get("highlight_color", "#FFE600")))
+        gl_sz = max(2, round(float(style.get("glow_size", 4)) * scale_stroke))
+        gl_bl = max(3, round(float(style.get("glow_blur", 8)) * scale_stroke))
+
+    # Base effect tags to restore after an active word ends
+    if effect_type == "glow":
+        base_sz = max(2, round(float(style.get("glow_size", 5)) * scale_stroke))
+        base_bl = max(3, round(float(style.get("glow_blur", 8)) * scale_stroke))
+        base_col = ass_color(style.get("glow_color", style.get("text_color", "#FFE600")))
+        restore_effect = f"\\3c{base_col}\\bord{base_sz}\\blur{base_bl}"
+    elif effect_type == "outline":
+        base_sz = max(1, round(float(style.get("outline_width", 4)) * scale_stroke))
+        base_col = ass_color(style.get("outline_color", "#000000"))
+        restore_effect = f"\\3c{base_col}\\bord{base_sz}\\blur0"
+    elif effect_type in {"shadow", "none"}:
+        restore_effect = "\\bord0\\blur0"
+    else:  # box
+        restore_effect = ""
 
     def render_word(index, word, default_color):
         safe = safe_ass_text(template_display_text(word.get('text', ''), template))
         if index == active_index:
-            hl = ass_color('#FFFFFF') if default_color == highlight_colour else highlight_colour
-            return '{' + f'\\1c{hl}' + '}' + safe + '{' + f'\\1c{default_color}' + '}'
+            if has_glow:
+                active_c = highlight_colour
+                return "{" + f"\\1c{active_c}\\3c{gl_col}\\bord{gl_sz}\\blur{gl_bl}" + "}" + safe + "{" + f"{restore_effect}\\1c{default_color}" + "}"
+            else:
+                active_c = ass_color('#FFFFFF') if default_color == highlight_colour else highlight_colour
+                return "{" + f"\\1c{active_c}" + "}" + safe + "{" + f"\\1c{default_color}" + "}"
         return safe
 
     if second:
-        first_text = "{" + f"\\fs{span_size}\\1c{line1_color}" + "}" + ' '.join(render_word(i, word, line1_color) for i, word in enumerate(first))
-        second_text = "{" + f"\\fs{strong_size}\\1c{line2_color}" + "}" + ' '.join(render_word(split + i, word, line2_color) for i, word in enumerate(second))
+        first_text = "{" + f"\\fn{font1}\\fs{span_size}\\b{bold1}\\i{italic1}\\1c{line1_color}" + "}" + ' '.join(render_word(i, word, line1_color) for i, word in enumerate(first))
+        second_text = "{" + f"\\fn{font2}\\fs{strong_size}\\b{bold2}\\i{italic2}\\1c{line2_color}" + "}" + ' '.join(render_word(split + i, word, line2_color) for i, word in enumerate(second))
         return first_text + r'\N' + second_text
     else:
-        return "{" + f"\\fs{strong_size}\\1c{line1_color}" + "}" + ' '.join(render_word(i, word, line1_color) for i, word in enumerate(first))
+        line_font = font2 if max_lines == 1 else font1
+        line_bold = bold2 if max_lines == 1 else bold1
+        line_italic = italic2 if max_lines == 1 else italic1
+        first_text = "{" + f"\\fn{line_font}\\fs{strong_size}\\b{line_bold}\\i{line_italic}\\1c{line1_color}" + "}" + ' '.join(render_word(i, word, line1_color) for i, word in enumerate(first))
+        return first_text
 
 
 def _reference_canvas(video_width: int, video_height: int) -> tuple[int, int]:
@@ -915,7 +998,6 @@ def write_ass(chunks, out_path: Path, font_size: int, position_percent: int, sty
     tmpl_id = str(template.get('id', ''))
     position_percent = max(8, min(92, int(position_percent)))
 
-    # On a standard canvas, scale font sizes from the template definition so they match creator impact
     scale_canvas = canvas_width / 720.0
     user_multiplier = max(0.5, min(2.0, float(font_size) / 54.0))
 
@@ -930,7 +1012,6 @@ def write_ass(chunks, out_path: Path, font_size: int, position_percent: int, sty
 
     effective_size = strong_size
 
-    # The template itself controls safe-area and line rhythm.
     max_chars = max(12, int(template.get("max_chars", 28)))
     safe_area = max(0.72, min(0.96, float(template.get("safe_area", 0.92))))
     if source_height > source_width:
@@ -939,24 +1020,56 @@ def write_ass(chunks, out_path: Path, font_size: int, position_percent: int, sty
     max_chars = min(max_chars, max(18, round(0.11 * safe_canvas_width)))
 
     base_y = round(canvas_height * (position_percent / 100.0))
-    export_border_style = int(style.get("border_style", 1) or 1)
     scale_stroke = canvas_width / 720.0
 
-    if export_border_style == 3:
-        export_outline_width = max(16, round(12 * scale_stroke))
-        bg_opacity = int(style.get('background_opacity', 0) or 0)
-        if bg_opacity <= 0:
-            bg_opacity = 90
+    effect_type = str(style.get("effect_type", "shadow"))
+
+    if effect_type == "box":
+        export_border_style = 3
+        bg_opacity = int(style.get("background_opacity", 90) or 90)
         bg_opacity = max(40, min(100, bg_opacity))
         bg_alpha = round(255 * (100 - bg_opacity) / 100)
-        box_outline_colour = ass_color(style.get('background_color', '#000000'), bg_alpha)
-        back_colour = ass_color(style.get('background_color', '#000000'), bg_alpha)
-    else:
-        export_outline_width = max(3, round(float(style.get('outline_width', 2)) * scale_stroke * 1.35))
-        box_outline_colour = ass_color(style.get('outline_color', '#000000'))
-        bg_alpha = 0
-        back_colour = ass_color(style.get('outline_color', '#000000'))
-    shadow_width = max(0, round(float(style.get('shadow', 2)) * scale_stroke * 1.2))
+        bg_col = ass_color(style.get("background_color", "#000000"), bg_alpha)
+        box_outline_colour = bg_col
+        back_colour = bg_col
+        export_outline_width = max(10, round(float(style.get("box_padding", 14)) * scale_stroke))
+        shadow_width = max(0, round(float(style.get("shadow", 0)) * scale_stroke))
+    elif effect_type == "glow":
+        export_border_style = 1
+        glow_color = ass_color(style.get("glow_color", style.get("text_color", "#FFE600")))
+        glow_size = max(2, round(float(style.get("glow_size", 5)) * scale_stroke))
+        glow_blur = max(3, round(float(style.get("glow_blur", 8)) * scale_stroke))
+        box_outline_colour = glow_color
+        back_colour = glow_color
+        export_outline_width = glow_size
+        shadow_width = 0
+    elif effect_type == "outline":
+        export_border_style = 1
+        export_outline_width = max(1, round(float(style.get("outline_width", 4)) * scale_stroke))
+        outline_col = ass_color(style.get("outline_color", "#000000"))
+        box_outline_colour = outline_col
+        back_colour = outline_col
+        shadow_width = 0
+    elif effect_type == "shadow":
+        export_border_style = 1
+        shadow_x = float(style.get("shadow_x", style.get("shadow", 3)))
+        shadow_y = float(style.get("shadow_y", style.get("shadow", 3)))
+        shadow_blur = float(style.get("shadow_blur", 0))
+        shadow_width = max(1, round(max(abs(shadow_x), abs(shadow_y)) * scale_stroke))
+        shadow_color = ass_color(style.get("shadow_color", "#000000"))
+        box_outline_colour = "&HFF000000"  # transparent outline
+        back_colour = shadow_color
+        export_outline_width = 0  # NO OUTLINE!
+    else:  # none
+        export_border_style = 1
+        box_outline_colour = "&HFF000000"
+        back_colour = "&HFF000000"
+        export_outline_width = 0
+        shadow_width = 0
+
+    font_default = _ass_font_name(template.get("font_name", style.get("font_name", "Arial")))
+    bold_def = -1 if style.get("bold", True) else 0
+    italic_def = 1 if style.get("italic", False) else 0
 
     header = f"""[Script Info]
 ScriptType: v4.00+
@@ -968,11 +1081,21 @@ YCbCr Matrix: TV.709
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Default,{_ass_font_name(style)},{effective_size},{ass_color(style['text_color'])},{ass_color(style['text_color'])},{box_outline_colour},{back_colour},{-1 if style.get('bold') else 0},{1 if style.get('italic') else 0},0,0,100,100,{float(template.get('letter_spacing', 0)):.2f},0,{export_border_style},{export_outline_width},{shadow_width},5,0,0,0,1
+Style: Default,{font_default},{effective_size},{ass_color(style['text_color'])},{ass_color(style['text_color'])},{box_outline_colour},{back_colour},{bold_def},{italic_def},0,0,100,100,{float(template.get('letter_spacing', 0)):.2f},0,{export_border_style},{export_outline_width},{shadow_width},5,0,0,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
+
+    font1 = _ass_font_name(template.get("font_name_line1", template.get("font_name", "Arial")))
+    bold1 = 1 if template.get("bold_line1", template.get("bold", True)) else 0
+    italic1 = 1 if template.get("italic_line1", template.get("italic", False)) else 0
+    left_col = ass_color(style.get('line1_color', style.get('text_color', '#FFFFFF')))
+
+    font2 = _ass_font_name(template.get("font_name_line2", template.get("font_name", "Arial")))
+    bold2 = 1 if template.get("bold_line2", template.get("bold", True)) else 0
+    italic2 = 1 if template.get("italic_line2", template.get("italic", False)) else 0
+    right_col = ass_color(style.get('line2_color', style.get('highlight_color', style.get('text_color', '#FFFFFF'))))
 
     lines = [header]
     for chunk in (chunks or []):
@@ -984,7 +1107,11 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             continue
         max_lines = max(1, int(template.get('max_lines', 2)))
         if max_lines == 1 or len(raw_words) <= 1:
-            display_text = "{" + f"\\fs{strong_size}" + "}" + safe_ass_text(" ".join(raw_words))
+            line_font = font2 if max_lines == 1 else font1
+            line_bold = bold2 if max_lines == 1 else bold1
+            line_italic = italic2 if max_lines == 1 else italic1
+            line_col = right_col if max_lines == 1 else left_col
+            display_text = "{" + f"\\fn{line_font}\\fs{strong_size}\\b{line_bold}\\i{line_italic}\\1c{line_col}" + "}" + safe_ass_text(" ".join(raw_words))
         else:
             if len(raw_words) == 2:
                 split = 1
@@ -997,14 +1124,11 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             left = " ".join(raw_words[:split])
             right = " ".join(raw_words[split:])
             if right:
-                left_col = ass_color(style.get('line1_color', style['text_color']))
-                right_col = ass_color(style.get('line2_color', style['text_color']))
-                left_styled = "{" + f"\\fs{span_size}\\1c{left_col}" + "}" + safe_ass_text(left)
-                right_styled = "{" + f"\\fs{strong_size}\\1c{right_col}" + "}" + safe_ass_text(right)
+                left_styled = "{" + f"\\fn{font1}\\fs{span_size}\\b{bold1}\\i{italic1}\\1c{left_col}" + "}" + safe_ass_text(left)
+                right_styled = "{" + f"\\fn{font2}\\fs{strong_size}\\b{bold2}\\i{italic2}\\1c{right_col}" + "}" + safe_ass_text(right)
                 display_text = left_styled + r"\N" + right_styled
             else:
-                line_col = ass_color(style.get('line1_color', style['text_color']))
-                display_text = "{" + f"\\fs{strong_size}\\1c{line_col}" + "}" + safe_ass_text(left)
+                display_text = "{" + f"\\fn{font1}\\fs{strong_size}\\b{bold1}\\i{italic1}\\1c{left_col}" + "}" + safe_ass_text(left)
 
         line_count = max(1, display_text.count(r"\N") + 1)
         estimated_half_h = max(1, round(effective_size * line_count * max(0.38, float(template.get("line_height", 0.90)) * 0.55)))
@@ -1013,27 +1137,39 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         start = ass_time(chunk['start'])
         end = ass_time(chunk['end'])
         animation = str(template.get("animation", "none"))
-        # Static pos tag keeps text in place without jumping or shrinking on each word
-        pos_tag_static = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}"
-        if animation == "glow":
-            glow = max(2, min(10, int(round(float(style.get("shadow", 5)) * 0.7))))
-            pos_tag_static += "{\\blur%d\\bord%d}" % (glow, max(1, int(export_outline_width)))
+
+        pos_tag_base = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}"
+
+        # Visual effect override tag
+        if effect_type == "glow":
+            pos_tag_effect = f"{{\\blur{glow_blur}\\bord{glow_size}\\3c{glow_color}\\4c{glow_color}\\shad0}}"
+        elif effect_type == "shadow":
+            pos_tag_effect = f"{{\\bord0\\blur0\\xshad{round(shadow_x * scale_stroke)}\\yshad{round(shadow_y * scale_stroke)}\\4c{shadow_color}}}"
+        elif effect_type == "outline":
+            pos_tag_effect = f"{{\\bord{export_outline_width}\\3c{outline_col}\\shad0\\blur0}}"
+        elif effect_type == "none":
+            pos_tag_effect = "{\\bord0\\shad0\\blur0}"
+        else:  # box
+            pos_tag_effect = ""
+
+        # Pos tag static keeps text in place
+        pos_tag_static = pos_tag_base + pos_tag_effect
 
         # Chunk entrance animation (applied only at chunk start)
         if animation == "slide":
-            pos_tag_entrance = f"{{\\an5\\move({canvas_width//2},{safe_y+35},{canvas_width//2},{safe_y},0,180)}}"
+            pos_tag_entrance = f"{{\\an5\\move({canvas_width//2},{safe_y+35},{canvas_width//2},{safe_y},0,180)}}" + pos_tag_effect
         elif animation == "pop":
-            pos_tag_entrance = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}{{\\fscx92\\fscy92\\t(0,120,\\fscx100\\fscy100)}}"
+            pos_tag_entrance = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}{{\\fscx92\\fscy92\\t(0,120,\\fscx100\\fscy100)}}" + pos_tag_effect
         elif animation == "fade":
-            pos_tag_entrance = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}{{\\fad(110,0)}}"
+            pos_tag_entrance = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}{{\\fad(110,0)}}" + pos_tag_effect
         else:
             pos_tag_entrance = pos_tag_static
 
         # Standard pos tag for entire chunk when not highlighted word-by-word
-        if animation == "slide" or animation == "pop":
+        if animation in {"slide", "pop"}:
             pos_tag_chunk = pos_tag_entrance
         elif animation == "fade":
-            pos_tag_chunk = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}{{\\fad(110,80)}}"
+            pos_tag_chunk = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}{{\\fad(110,80)}}" + pos_tag_effect
         else:
             pos_tag_chunk = pos_tag_static
 
@@ -1044,12 +1180,12 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                 active_end = min(float(chunk['end']), next_start)
                 if active_end <= active_start:
                     continue
-                highlighted = render_highlighted_text(chunk, idx, style, max_chars, template, span_size, strong_size)
+                highlighted = render_highlighted_text(chunk, idx, style, max_chars, template, span_size, strong_size, scale_stroke)
                 # Animate entrance ONLY on the first word of the chunk; subsequent words stay rock-solid
                 if idx == 0:
                     tag = pos_tag_entrance
                 elif idx == len(words) - 1 and animation == "fade":
-                    tag = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}{{\\fad(0,80)}}"
+                    tag = f"{{\\an5\\pos({canvas_width // 2},{safe_y})}}{{\\fad(0,80)}}" + pos_tag_effect
                 else:
                     tag = pos_tag_static
                 lines.append(f"Dialogue: 0,{ass_time(active_start)},{ass_time(active_end)},Default,,0,0,0,,{tag}{highlighted}\n")
@@ -1057,17 +1193,6 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             lines.append(f"Dialogue: 0,{start},{end},Default,,0,0,0,,{pos_tag_chunk}{display_text}\n")
 
     out_path.write_text(''.join(lines), encoding='utf-8')
-
-def _ass_font_name(style: dict) -> str:
-    """Return a Windows/libass-friendly font family while preserving template intent."""
-    name = str(style.get("font_name", "Arial"))
-    aliases = {
-        "Impact": "Impact",
-        "Arial": "Arial",
-        "Georgia": "Georgia",
-        "Courier New": "Courier New",
-    }
-    return aliases.get(name, "Arial")
 
 
 
@@ -1106,9 +1231,13 @@ def run_ffmpeg(input_path: Path, ass_path: Path, output_path: Path, volume_perce
     volume_percent = max(0, min(200, int(volume_percent)))
     volume = volume_percent / 100.0
 
+    fonts_dir = (BASE_DIR / "fonts").resolve()
+    fonts_dir_str = str(fonts_dir).replace("\\", "/").replace(":", r"\:")
+    vf_subtitles = f"subtitles=filename='{ass_path.name}':fontsdir='{fonts_dir_str}'"
+
     cmd = [
-        ffmpeg, "-y", "-i", str(input_path),
-        "-vf", f"subtitles=filename='{ass_path.name}'",
+        ffmpeg, "-y", "-i", str(input_path.resolve()),
+        "-vf", vf_subtitles,
         "-map", "0:v:0", "-map", "0:a:0?",
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
         "-pix_fmt", "yuv420p",
@@ -1117,7 +1246,7 @@ def run_ffmpeg(input_path: Path, ass_path: Path, output_path: Path, volume_perce
         cmd += ["-af", f"volume={volume:.2f}"]
     cmd += [
         "-c:a", "aac", "-b:a", "192k", "-ar", "48000",
-        "-movflags", "+faststart", str(output_path),
+        "-movflags", "+faststart", str(output_path.resolve()),
     ]
 
     completed = subprocess.run(cmd, cwd=str(ass_path.parent), capture_output=True, text=True, errors="replace")
@@ -1422,8 +1551,9 @@ async def render_editor(request: dict):
         template = get_template_object(template_id)
         style = dict(CAPTION_TEMPLATES[template["id"]])
 
-        if isinstance(requested_template, dict) and str(requested_template.get("id", template_id)) == template_id:
-            template.update({k: requested_template[k] for k in template.keys() if k in requested_template})
+        # Canonical template definition from get_template_object(template_id)
+        # and CAPTION_TEMPLATES is the authoritative source of truth.
+        # User edits modify caption content and timing, preserving template design.
 
         chunks = prepare_render_chunks(chunks, template)
 
