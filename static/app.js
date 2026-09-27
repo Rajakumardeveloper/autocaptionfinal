@@ -553,7 +553,15 @@ form.addEventListener('submit', event => {
     if (xhr.status >= 200 && xhr.status < 300 && xhr.response) {
       openCaptionEditor(xhr.response);
     } else {
-      showError((xhr.response && xhr.response.detail) || 'Something went wrong while transcribing the video.');
+      let msg = (xhr.response && xhr.response.detail) || '';
+      if (!msg && xhr.status === 502) {
+        msg = 'Server returned 502 Bad Gateway. The server may have timed out or restarted (e.g. out of memory on large videos). Check Render logs.';
+      } else if (!msg && xhr.status === 504) {
+        msg = 'Server returned 504 Gateway Timeout. Video processing took longer than Render\'s 100-second limit.';
+      } else if (!msg && xhr.status) {
+        msg = `Server returned error (${xhr.status}). Check Render logs for details.`;
+      }
+      showError(msg || 'Something went wrong while transcribing the video.');
       resetProcessingState();
     }
   };
