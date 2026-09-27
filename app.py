@@ -33,10 +33,13 @@ MAX_UPLOAD_MB = int(os.getenv("MAX_UPLOAD_MB", "500"))
 
 app = FastAPI(title="AutoCaption AI")
 
+CPU_THREADS = int(os.getenv("WHISPER_THREADS", "4"))
+
 model = WhisperModel(
     MODEL_SIZE,
     device=DEVICE,
     compute_type=COMPUTE_TYPE,
+    cpu_threads=CPU_THREADS,
 )
 
 # Temporary editor sessions. Each session keeps the uploaded source video and
@@ -1331,10 +1334,12 @@ async def caption_video(
         if requested_mode not in {"auto", "hinglish", "hi", "en"}:
             requested_mode = "auto"
 
+        beam_size = int(os.getenv("WHISPER_BEAM_SIZE", "2"))
+        best_of = int(os.getenv("WHISPER_BEST_OF", "1"))
         transcribe_kwargs = {
-            "beam_size": 8,
-            "best_of": 5,
-            "patience": 1.2,
+            "beam_size": beam_size,
+            "best_of": best_of,
+            "patience": 1.0,
             "temperature": 0.0,
             "compression_ratio_threshold": 2.4,
             "log_prob_threshold": -1.0,
@@ -1344,7 +1349,7 @@ async def caption_video(
             "condition_on_previous_text": True,
             "word_timestamps": True,
             "multilingual": True,
-            "language_detection_segments": 5,
+            "language_detection_segments": 1,
             "language_detection_threshold": 0.35,
             "initial_prompt": (
                 "Indian creator speech. Hindi, English and Hinglish can be mixed. "
