@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: autocaptionfinal
+    runtime: docker
+    plan: free
+    envVars:
+      - key: WHISPER_DEVICE
+        value: cpu
+      - key: WHISPER_COMPUTE_TYPE
+        value: int8
+      - key: WHISPER_MODEL
+        value: base
